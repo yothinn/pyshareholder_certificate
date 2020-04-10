@@ -7,9 +7,10 @@ import gspread
 # Transaction sharesholder google sheet and sheet name
 GGSHEET_ID = "1blvVgkPMWyC5x_B2c7gx0NfozQsxVSGR_Un1zh_aWMg"
 GGSHEET_NAME = "transactions"
-CRED_FILE = "./env/thamturakit-data-center-credential.json"
+CRED_FILE = "./config/thamturakit-data-center-credential.json"
+BGIMAGE_FILE = "./config/shareholder_masterform.jpg"
 OUTPUT_PATH = "./output/"
-FONT_FILE = "./env/THSarabunIT.ttf"
+FONT_FILE = "./config/THSarabunIT.ttf"
 FONT_SIZE = 32
 CERT_POS = {
     "shareholder_id": (100, 100),
@@ -48,6 +49,10 @@ create shareholder certificate jpeg image
 return true for success create jpeg image file
 '''
 def shareholder_cert(datadict, filename):
+    # font = ImageFont.truetype('THSarabunIT.ttf', size=32)
+
+    # bgimage = Image.open("participate_certificate_bg.jpg")
+    # _draw = ImageDraw.Draw(bgimage)
     print(CERT_POS)
     print(datadict)
 
@@ -74,7 +79,7 @@ def main():
     print('*** Generate Participate/Investment Certificate ***')
     print('*** when exit  please type "exit" ')
 
-    # font = ImageFont.truetype('THSarabunIT.ttf', size=32)
+    
 
     while(True):
 
