@@ -14,19 +14,22 @@ CERT_POS = {
     "num_share": (1000, 900),
     "share_amount": (1420, 1045),
     "share_bahttext": (200, 1180),
-    "cert_date": (550, 1310)
+    "cert_date": (550, 1310),
+    "refer": (200, 1930)
 }
 
 # Google sheet index
 GGSHEET_INDEX = {
     "shareholder_id": 0,
     "no_cert": 12,
-    "title": 17,
-    "firstname": 18,
-    "lastname": 19,
+    "title": 22,
+    "firstname": 23,
+    "lastname": 24,
     "num_share": 10,
     "share_amount": 8,
-    "cert_date": 3
+    "cert_date": 3,
+    "line_name": 25,
+    "fb_name": 26,
 }
 
 
@@ -39,7 +42,10 @@ class ShareholderData:
         self.lastname = ggsheet_row[GGSHEET_INDEX["lastname"]]
         self.num_share = ggsheet_row[GGSHEET_INDEX["num_share"]]
         self.share_amount = ggsheet_row[GGSHEET_INDEX["share_amount"]]
-        self.cert_date = ggsheet_row[GGSHEET_INDEX["cert_date"]] 
+        self.cert_date = ggsheet_row[GGSHEET_INDEX["cert_date"]]
+        self.line_name = ggsheet_row[GGSHEET_INDEX["line_name"]]
+        self.fb_name = ggsheet_row[GGSHEET_INDEX["fb_name"]]
+
 
     @property
     def shareholder_id(self):
@@ -122,6 +128,26 @@ class ShareholderData:
         if var:
             self.__cert_date = datetime.strptime(var, '%d/%m/%Y')
 
+    @property
+    def line_name(self):
+        return self.__line_name
+
+    @line_name.setter
+    def line_name(self, var):
+        self.__line_name = ""
+        if var:
+            self.__line_name = var
+    
+    @property
+    def fb_name(self):
+        return self.__fb_name
+
+    @fb_name.setter
+    def fb_name(self, var):
+        self.__fb_name = ""
+        if (var):
+            self.__fb_name = var
+
     '''
     create shareholder certificate jpeg image
         @param {data} Shareholder data
@@ -149,6 +175,16 @@ class ShareholderData:
         draw.text(CERT_POS["share_amount"], "{:,.2f}".format(self.share_amount), FONT_COLOR, font=font)
         draw.text(CERT_POS["share_bahttext"], "( {} )".format(bahttext(self.share_amount)), FONT_COLOR, font=font)
         draw.text(CERT_POS["cert_date"], thai_strftime(self.cert_date, "%d %B %Y"), FONT_COLOR, font=font)
+
+        refer = ""
+        if (self.line_name):
+            refer = "LINE : {}".format(self.line_name)
+
+        if (self.fb_name):
+            refer =  "{}  FB: {}".format(refer, self.fb_name)
+        
+        #print(refer)
+        draw.text(CERT_POS["refer"], refer, "rgb(255, 255, 255)", font=font)
 
         bgimg.save(filename)
 

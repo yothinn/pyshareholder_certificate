@@ -51,7 +51,7 @@ def main():
         # Get data from google sheet
         try:
             for row in range(int(fr), int(er)+1):
-                row_data = worksheet.row_values(row)           
+                row_data = worksheet.row_values(row)
                 
                 # is null or not
                 if (not row_data):

@@ -128,4 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 config/thamturakit-data-center-credential.json
+config/thamturakit-data-center-credential_old.json
 output/
