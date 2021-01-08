@@ -35,6 +35,7 @@ GGSHEET_INDEX = {
 
 class ShareholderData:
     def __init__(self, ggsheet_row):
+        l = len(ggsheet_row)
         self.shareholder_id = ggsheet_row[GGSHEET_INDEX["shareholder_id"]]
         self.no_cert = ggsheet_row[GGSHEET_INDEX["no_cert"]]
         self.title = ggsheet_row[GGSHEET_INDEX["title"]]
@@ -43,8 +44,16 @@ class ShareholderData:
         self.num_share = ggsheet_row[GGSHEET_INDEX["num_share"]]
         self.share_amount = ggsheet_row[GGSHEET_INDEX["share_amount"]]
         self.cert_date = ggsheet_row[GGSHEET_INDEX["cert_date"]]
-        self.line_name = ggsheet_row[GGSHEET_INDEX["line_name"]]
-        self.fb_name = ggsheet_row[GGSHEET_INDEX["fb_name"]]
+        if (GGSHEET_INDEX["line_name"] < l):
+            self.line_name = ggsheet_row[GGSHEET_INDEX["line_name"]]
+        else:
+            self.line_name = ""
+
+        #print("pass")
+        if (GGSHEET_INDEX["fb_name"] < l):
+            self.fb_name = ggsheet_row[GGSHEET_INDEX["fb_name"]]
+        else:
+            self.fb_name = ""
 
 
     @property

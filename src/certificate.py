@@ -53,6 +53,8 @@ def main():
             for row in range(int(fr), int(er)+1):
                 row_data = worksheet.row_values(row)
                 
+                #print(row_data)
+
                 # is null or not
                 if (not row_data):
                     print("Empty data")
